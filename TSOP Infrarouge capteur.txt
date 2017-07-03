@@ -1,0 +1,7 @@
+Gros :
+capteur face à soi
+moins 5V collecteur
+
+
+Petits : DX allongés (pas ronds)
+Pin layout is (if sensor hump looks at you): Output signal left; ground/VSS middle, VCC(+5V) right.

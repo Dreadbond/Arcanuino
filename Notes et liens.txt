@@ -1,0 +1,182 @@
+TOUT
+https://create.arduino.cc/projecthub
+
+ondes courte portée
+
+------------------------
+---------Module---------
+------------------------
+
+------------reconnaissance contacts capacitive
+http://www.instructables.com/id/Capacitive-Sensing-for-Dummies/step2/Stuff-that-uses-capacitive-sensors/
+
+
+------------
+initialisation serialport
+http://danialk.github.io/blog/2014/04/12/arduino-and-nodejs-communication-with-serial-ports/
+
+exemple Node.js
+https://itp.nyu.edu/physcomp/labs/labs-serial-communication/lab-serial-control-of-an-arduino/
+
+------------transmission données
+https://www.analysir.com
+http://www.instructables.com/id/Duino-Tagger/
+http://forum.arduino.cc/index.php?topic=22532.0
+
+http://forum.snootlab.com/viewtopic.php?f=36&t=996&p=4627&hilit=infra#p4627
+http://forum.arduino.cc/index.php?topic=66926.0
+
+Ss fil Teensy
+https://www.pjrc.com/teensy/td_libs_VirtualWire.html
+
+Tuto qui marche
+http://tiptopboards.free.fr/arduino_forum/viewtopic.php?f=2&t=9
+
+------------Transmission serveur
+Module nrf24l01
+sigfox
+Ibterfaces Ioo
+http://playground.arduino.cc/Main/InterfacingWithSoftware
+
+------------NFC
+http://www.gotronic.fr/art-module-rfid-125-khz-113990041-21513.htm
+https://github.com/Seeed-Studio/RFID_Library
+
+
+------------Radio
+http://blog.idleman.fr/raspberry-pi-08-jouer-avec-les-ondes-radio/
+http://robotlabo.eu/pageTuto/tutoSansFil.html
+http://rcarduino.blogspot.fr/2012/04/how-to-read-multiple-rc-channels-draft.html
+
+------------Infrarouge
+https://www.quora.com/Can-a-single-IR-command-be-received-simultaneously-by-multiple-IR-receivers
+https://www.quora.com/How-do-IR-receivers-differentiate-between-signals-sent-from-an-IR-transmitter-Is-it-by-different-signal-lengths-or-strobing#
+
+http://www.righto.com/2009/08/multi-protocol-infrared-remote-library.html
+http://fr.farnell.com/vishay-semiconductor/tsop31238/recepteur-ir-36khz/dp/1469635?ost=TSOP31238&selectedCategoryId=&categoryName=Toutes+les+cat%C3%A9gories&categoryNameResp=Toutes%2Bles%2Bcat%25C3%25A9gories
+
+------------Powerball
+Capteur de vitesse a effet hall
+https://www.arduino.cc/en/Reference/AudioFrequencyMeter
+
+------------Gant - données
+http://gerardllorach.weebly.com/uploads/2/6/7/1/26710587/gesturerecognitionandinteractionwithaglovecontroller_gerardllorach.pdf
+http://www.laboiteverte.fr/gants-traduisent-langage-signes-et-en-langage-parle/
+
+
+------------Bluetooth
+http://www.instructables.com/id/Success-Using-the-JY-MCU-linvor-Bluetooth-Module/step4/Services/
+*****http://www.instructables.com/id/How-to-install-and-use-the-JY-MCU-Bluetooth-module/
+*****http://appinventor.pevest.com/?p=718
+
+http://www.instructables.com/id/Androino-Talk-with-an-Arduino-from-your-Android-d/
+http://www.instructables.com/id/Arduino-JY-MCU-Module-Bluetooth-Android-Applicatio/step4/Download-Android-application/
+https://github.com/rwaldron/johnny-five/wiki/Getting-Started-with-Johnny-Five-and-JY-MCU-Bluetooth-Serial-Port-Module
+
+Avec exemples de données
+http://forum.arduino.cc/index.php?topic=145374.0
+
+XBee 
+------------Communication
+http://www.picbasic.co.uk/forum/showthread.php?t=4934
+AM RX433 linear output
+http://forum.arduino.cc/index.php?topic=435941.0
+http://forum.arduino.cc/index.php?topic=66694.0
+
+------------Dété hauteur
+http://www.instructables.com/id/Frequency-Detector-using-PIC-12F683-Processor/
+http://interface.khm.de/index.php/lab/interfaces-advanced/arduino-frequency-counter-library/
+https://bochovj.wordpress.com/2013/06/23/sound-analysis-in-arduino/
+https://www.arduino.cc/en/Reference/AudioFrequencyMeter
+
+------------Gyroscope
+https://learn.adafruit.com/adafruit-triple-axis-gyro-breakout/assembly-and-wiring
+http://forum.arduino.cc/index.php?topic=360384.0
+http://fsfcayne.free.fr/autre/prog.txt
+https://github.com/pololu/l3g-arduino
+https://www.nordevx.com/content/l3gd20h-gyro
+
+Module gyroscope L3GD20H 2129
+
+------------Accéléromètres
+http://www.dimensionengineering.com/info/accelerometers
+http://www.instructables.com/id/3-axis-accelerometer-based-gesture-recognition/step3/Creating-a-dataset/
+
+
+BMA220
+http://www.dfrobot.com/wiki/index.php/Triple_Axis_Accelerometer_BMA220(Tiny)_SKU:SEN0168
+http://www.arduino-projekte.de/index.php?n=13
+
+
+http://diopter.fr/index.php/technique/systeme-numerique/41-adx-335-et-arduino
+http://www.robotshop.com/blog/en/arduino-5-minute-tutorials-lesson-7-accelerometers-gyros-imus-3634
+http://tiptopboards.free.fr/arduino_forum/viewtopic.php?f=2&t=28
+https://openclassrooms.com/forum/sujet/tuto-arduino-gyroscope-mpu6050-pour-debutants
+
+http://www.instructables.com/id/ArduinoGyroscopeProcessing/step3/Software/
+
+MCP3008
+
+-----------Magnétomètre
+LIS3MDL
+http://www.st.com/content/ccc/resource/technical/document/datasheet/54/2a/85/76/e3/97/42/18/DM00075867.pdf/files/DM00075867.pdf/jcr:content/translations/en.DM00075867.pdf
+http://lookmanowire.blogspot.fr/search/label/Electronic%20compass
+
+-----------Outdoor
+http://forum.arduino.cc/index.php?topic=168599.0
+http://forum.arduino.cc/index.php?topic=232217.0
+
+-----------Vus
+TSOP38238 ++
+TSSP4038  +++++
+TSOP321..,
+Led 
+TSAL6100 
+
+------------------------
+----------Combi---------
+------------------------
+
+XBee 
+
+https://www.adafruit.com/datasheets/HandcraftingSensors.pdf
+Myo gesture control armband 
+
+---------Multiplexage
+https://upload.wikimedia.org/wikipedia/commons/2/2b/CapdividerFR.png
+http://www.instructables.com/id/Stickytape-Sensors
+http://www.kobakant.at/DIY/?p=4342
+
+---------Commande matériaux sympas :
+http://www.kobakant.at/DIY/?p=381
+http://www.journaldugeek.com/2016/02/23/kaust-paper-skin-peau-artificielle/
+http://www.kobakant.at/DIY/?p=2800
+piezoresistive suit
+
+
+
+---------autre matériaux
+http://www.instructables.com/id/Conductive-Rubber-Make-Touch-Sensitive-Robot-Skin/
+http://www.instructables.com/id/DIY-Force-Sensitive-Resistor-FSR/
+Jacquard
+
+---------autre cateurs
+http://sensorwiki.org/
+http://sensorwiki.org/doku.php/sensors/galvanic_skin_response
+NFC
+RFID
+BLE
+http://www.instructables.com/id/RFID-Reader-Detector-and-Tilt-Sensitive-RFID-Tag/step2/Building-the-RFID-Antenna/
+http://electronics.stackexchange.com/questions/9255/rfid-antenna-array
+http://www.seeedstudio.com/depot/125khz-rfid-module-uart-p-171.html?zenid=09bfb99d14c91f240ff5e9077a3d0d0e
+https://cdn-shop.adafruit.com/datasheets/rfid+guide.pdf
+http://www.bebopsensors.com/accolades/
+
+
+-----------Vus
+https://commons.wikimedia.org/wiki/File:High_pass_filter.png?uselang=fr
+http://www.instructables.com/id/Neoprene-Bend-Sensor-IMPROVED/?ALLSTEPS
+https://learn.sparkfun.com/tutorials/sik-experiment-guide-for-arduino---v32/experiment-9-using-a-flex-sensor
+
+
+http://arduino-from-scratch.over-blog.org/article-la-led-clignotante-88541471.html

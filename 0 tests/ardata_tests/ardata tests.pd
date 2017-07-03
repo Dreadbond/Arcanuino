@@ -1,0 +1,30 @@
+#N canvas 811 39 773 660 10;
+#X obj 202 92 comport 9600;
+#X msg 174 43 devices;
+#X msg 174 22 open 4;
+#X msg 174 64 close 4;
+#X obj 229 174 t f b;
+#X obj 256 198 counter;
+#X obj 155 270 vsl 15 128 0 255 0 0 empty empty empty 0 -9 0 10 -262144
+-1 -1 1594 1;
+#X obj 175 270 vsl 15 128 0 255 0 0 empty empty empty 0 -9 0 10 -262144
+-1 -1 0 1;
+#X obj 263 234 sel 1;
+#X floatatom 147 414 5 0 0 0 - - -;
+#X floatatom 187 414 5 0 0 0 - - -;
+#X obj 208 207 + 1;
+#X obj 208 230 gate 2;
+#X connect 0 0 4 0;
+#X connect 1 0 0 0;
+#X connect 2 0 0 0;
+#X connect 3 0 0 0;
+#X connect 4 0 12 1;
+#X connect 4 1 5 0;
+#X connect 5 0 8 0;
+#X connect 5 0 11 0;
+#X connect 6 0 9 0;
+#X connect 7 0 10 0;
+#X connect 8 0 5 2;
+#X connect 11 0 12 0;
+#X connect 12 0 6 0;
+#X connect 12 1 7 0;
