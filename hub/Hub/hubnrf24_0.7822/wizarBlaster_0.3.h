@@ -49,7 +49,7 @@ if (from == ":wizbla" && justReceive) {
   StaticJsonBuffer<100> jsonBuffer;
   JsonObject& root = jsonBuffer.createObject();
 
-  root["to"]    = "!111111";
+  root["to"]    = IDObject;
   root["from"]  = ":wizbla";
 
   if (param.startsWith("!")) {

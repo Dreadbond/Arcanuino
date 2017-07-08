@@ -43,7 +43,7 @@ unsigned long resetCible ;          //décision de perdre la cible
 //données
 int debug = 0 ;
 char IDObject[8] = ":pistol";
-char IDHub[8]    = "!111111";  //111111
+char IDHub[8]    = "!11";  //111111
 char charCible[8];
 bool process ;
 int redNP ;
@@ -254,7 +254,7 @@ oldCible = cible ;
         irrecv.resume();
         //Serial.print(messActual[posCharRcv]);
         posCharRcv++ ;
-        resetCible = millis() + 200;                    //délai avant perte de cible 300 à la base. 200 ensuite 150 au moins
+        resetCible = millis() + 100;                    //délai avant perte de cible 300 à la base. 200 ensuite 150 au moins
         faireMessageCible = millis() + 50 ;             //délai avant de confirmer message
         //Serial.print(posCharRcv); Serial.print(" ");
         //Serial.print(strMessActual); Serial.print(" ");
@@ -309,7 +309,7 @@ if (resetCible < millis() || strMessActual.length() > lgMess ) {
 
 ////////////////////////////////////Envoi action c : cible (vise)
 if (cible != oldCible) {   //problème avec cible != oldCible  // && cible != "vide"
-    Serial.println(cible);
+    //Serial.println(cible);
     for (int i=0; i<7; i++) {  //pour l'envoi et la conversion en char
       charCible[i] = cible.charAt(i);//strMessActual[i] ;
       charCible[i+1] = '\0';

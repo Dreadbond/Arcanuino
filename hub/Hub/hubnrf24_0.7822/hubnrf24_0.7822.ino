@@ -24,7 +24,7 @@ Adafruit_NeoPixel strip = Adafruit_NeoPixel(Pix, PIN, NEO_GRB + NEO_KHZ800); //1
 //données
 const int led = 0;
 //char IDObject[8] = "!222222"; 
-char IDObject[8] = "!111111";
+char IDObject[8] = "!11";
 //char IDObject[8] = "!184675";  //Dessloch
 //char IDObject[8] = "!123456";  //Alarik
 //char IDObject[8] = "!986543";  //Rhea
@@ -168,7 +168,10 @@ hubReceiveSP() ;
       tagNxtChrTime = millis() + 15 ;  //15 500
       indexIRTag++;
     }
-  if(indexIRTag >= thisHub.tag.length()) {    indexIRTag=0; tagNxtChrTime = millis() + 100 ; } //100 2000
+  if(indexIRTag >= thisHub.tag.length()) {    
+    indexIRTag=0; 
+    tagNxtChrTime = millis() + 20 ; //100 2000
+    } 
 
   //taux de rafraichissement de l'envoi de données
   if (nextSend < millis() ) {canSend=1; nextSend = millis() + 10; }

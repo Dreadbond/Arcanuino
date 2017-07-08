@@ -248,3 +248,100 @@ if (stopEffectToken) chrono = TC3 ;
   }
 }
 
+bool vampireFbToken = LOW ;
+void vampireFb(String cmd = ""){
+  //PIXNUMBER
+  static bool effetStopFlag ;
+  static unsigned long chrono ;
+  static unsigned long timeTag ;
+  static float red ;
+  static float green ;
+  static float blue ;
+  static float bright ;
+  static int TC0 = 0 ;
+  static int TC1 = 500 ;
+  static int TC2 = TC1 + 2000 ;
+  static int TC3 = TC2 + 500 ;
+  static float index ;
+  long more = 2000 ;
+
+  if (millis() - 100 > chrono + timeTag) { timeTag = millis() ; }
+  chrono=millis() - timeTag;
+  //Serial.print(chrono); Serial.print(" "); Serial.print(millis()); Serial.print(" "); Serial.println(timeTag);
+
+if (stopEffectToken) chrono = TC3 ;
+if (cmd == "more" ) {
+  TC3 = chrono + more ;
+  bright = 100 ;
+  }
+
+
+
+
+  
+  if (chrono>TC0 && chrono<TC1) {
+    //for(int i=0 ; i<PIXNUMBER ; i++) {strip.setPixelColor(i, 0, 0, 0); }
+      for(int i=0; i<PIXNUMBER ; i++) {
+        
+      bright = map(chrono, TC0, TC1, 0, 100);
+      bright /= 100 ;
+
+      red = 0;
+      green = 200;
+      green *= random(50, 100);
+      green /= 100 ;
+    
+      blue = 40;
+      blue *= random(50, 100);
+      blue /= 100 ;
+      
+      strip.setPixelColor(i, red*bright, green*bright, blue*bright); 
+      strip.show();
+      }
+  }
+  if (chrono>TC1 && chrono<TC2){
+    //for(int i=0 ; i<PIXNUMBER ; i++) {strip.setPixelColor(i, 0, 0, 0); }
+      for(int i=0; i<PIXNUMBER ; i++) {
+
+      red = 0;
+      green = 200;
+      green *= random(50, 100);
+      green /= 100 ;
+    
+      blue = 40;
+      blue *= random(50, 100);
+      blue /= 100 ;
+      
+      bright = 100 ;
+
+      strip.setPixelColor(i, red*bright/100, green*bright/100, blue*bright/100); 
+      strip.show();
+      }
+  }
+  if (chrono>TC2 && chrono<TC3){
+    //for(int i=0 ; i<PIXNUMBER ; i++) {strip.setPixelColor(i, 0, 0, 0); }
+      for(int i=0; i<PIXNUMBER ; i++) {
+        
+      bright = map(chrono, TC2, TC3, 100, 0);
+      bright /= 100 ;
+
+      red = 0;
+      green = 200;
+      green *= random(50, 100);
+      green /= 100 ;
+    
+      blue = 40;
+      blue *= random(50, 100);
+      blue /= 100 ;
+      
+      strip.setPixelColor(i, red*bright, green*bright, blue*bright); 
+      strip.show();
+      }
+  }
+  if (chrono>TC3 ) {
+    for(int i=0 ; i<PIXNUMBER ; i++) {strip.setPixelColor(i, 0, 0, 0); strip.show();}
+  vampireFbToken=LOW;
+  }
+
+  cmd = "" ;
+}

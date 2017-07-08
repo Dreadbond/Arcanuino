@@ -102,7 +102,7 @@ float divi=16;
 float x,y,z;
 
 //communication
-int message_moniteur = 0 ; //49 pour données
+String inMessage = "" ; //49 pour données
 int messRCVhF ;
 
 bool cosplayMode = 1 ;
@@ -438,10 +438,20 @@ if (getValue ){
 }
   
 
-if (Serial.available() > 0) {message_moniteur = Serial.read() ; Serial.println(message_moniteur);}
+if (Serial.available() > 0) {
+  inMessage = Serial.readStringUntil(' ');
+  Serial.println(inMessage);
+  }
 
-if (message_moniteur == 49) {debug_mode = HIGH ;} else //if (message_moniteur == 50) 
-{debug_mode = LOW;}
+  
+
+if (inMessage == "debug") {
+  debug_mode = HIGH ;
+  } 
+  else //if (inMessage == 50) 
+  {
+  debug_mode = LOW;
+  }
 
 if (debug_mode) {
      Serial.print(x);   Serial.print(" ");
@@ -481,17 +491,25 @@ String recParamString=String(receiveBox.param);
     if (String(receiveBox.param).equals("fireball")) {stopEffectToken=1 ; fireBallFbToken=1;}   
     if (String(receiveBox.param).equals("protCast")) {stopEffectToken=1 ; protectionCastToken=1; }
     if (String(receiveBox.param).equals("protec"))   {stopEffectToken=1 ; protectionFbToken=1;}
-    //if (String(receiveBox.param).equals("vampire")) {stopEffectToken=0 ; protectionFbToken=1;}
+    if (String(receiveBox.param).equals("vampire")) {vampireFbToken=1 ; vampireFb("more") ;}
 
   process = 0;
   }
 
 /////////////////////////////////////Feedbacks
+  if (inMessage == "vampire") {
+    vampireFbToken=1 ; 
+    vampireFb("more") ;
+  }
 
+  
+  if (vampireFbToken) vampireFb() ;
   if(fireCastToken) fireCastFb();
   if(fireBallFbToken) fireBallFb();
 
   if(protectionCastToken) protectionCastFb();
   if(protectionFbToken) protectionFb();
+
+inMessage = "" ;
 
 }
