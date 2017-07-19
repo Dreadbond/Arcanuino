@@ -15,11 +15,14 @@ int indexIRTag = 0 ;
 #include <Adafruit_NeoPixel.h>
 #define PIN 5 //pin number that you have connected your data pin to
 #define Pix 16 //number of neopixels you have connected
+//#define Pix 16
 float redNP ;
 float greNP ;
 float bluNP ;
 float bright=0.4;
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(Pix, PIN, NEO_GRB + NEO_KHZ800); //1. nuber defines number of pixels you have connected, 2. is number of the pin your data is connected to, 3 and 4 are other arguments but use these as they are default for most neopixels but refet to datasheet for other options
+Adafruit_NeoPixel stripFB = Adafruit_NeoPixel(Pix, 6, NEO_GRB + NEO_KHZ800); //1. nuber defines number of pixels you have connected, 2. is number of the pin your data is connected to, 3 and 4 are other arguments but use these as they are default for most neopixels but refet to datasheet for other options
+
 
 //données
 const int led = 0;
@@ -33,21 +36,27 @@ bool justReceive ;
 bool canSend = 1;
 unsigned long nextSend ;
 String valueStr ;
-  String inMessage ;
+String inMessage ;
 
 //Communications RF
 #include <SPI.h>
 #include "nRF24L01.h"
 #include "RF24.h"
 RF24 radio(9,10);  // make sure this corresponds to the pins you are using : SCL SO
-const uint64_t pipes[5] = { 0xF0F0F0F0E1LL, 0xF0F0F0F0D2LL, 0xF0F0F0F066, 0xF0F0F0F012, 0xF0F0F0F042 };
+byte addresses[][8] = {"hub","flingue","wizbla","gant","grimoire"};
+int hub = 0 ;
+int flingue = 1 ;
+int wizblaAddress = 2 ;
+int gantAddress = 3 ;
+int grimoireAddress = 4 ;
+int epeeAddress = 5 ;
 
 
 typedef struct{
   char from[8];
-  char to[8];
   char param[8];
   float value;
+    
 }
 packet;
 
@@ -56,44 +65,40 @@ packet receiveBox ;
 packet uncertainBox ;
 
 void contenuSend(){
-  Serial.print(" FROM = ");
+  Serial.print(" FROM= ");
   Serial.print(sendBox.from);
-  Serial.print(" TO = ");
-  Serial.print(sendBox.to);
-  Serial.print(" param = ");
+  Serial.print(" param= ");
   Serial.print(sendBox.param);
-  Serial.print(" value = ");
+  Serial.print(" value= ");
   Serial.println(sendBox.value);
 }
 
 void contenuReceive(){
-  Serial.print(" FROM = ");
+  Serial.print(" FROM= ");
   Serial.print(receiveBox.from);
-  Serial.print(" TO = ");
-  Serial.print(receiveBox.to);
-  Serial.print(" param = ");
+  Serial.print(" param= ");
   Serial.print(receiveBox.param);
-  Serial.print(" value = ");
+  Serial.print(" value= ");
   Serial.println(receiveBox.value);
 }
 
 void contenuUncertain(){
-  Serial.print(" FROM = ");
+  Serial.print(" FROM= ");
   Serial.print(uncertainBox.from);
-  Serial.print(" TO = ");
-  Serial.print(uncertainBox.to);
-  Serial.print(" param = ");
+  Serial.print(" param= ");
   Serial.print(uncertainBox.param);
-  Serial.print(" value = ");
+  Serial.print(" value= ");
   Serial.println(uncertainBox.value);
 }
 
 #include "hub.h"
-#include "gant0.9.h"
 #include "flingue0.4.h"
 #include "wizarBlaster_0.3.h"
-#include "piquemord.h"
 
+/*
+#include "gant0.9.h"
+#include "piquemord.h"
+*/
 
 
 void setup()
@@ -107,60 +112,75 @@ void setup()
   radio.setPALevel(RF24_PA_MIN);
 
   radio.setChannel(chan);
+  /*
   radio.openWritingPipe(pipes[4]);
   radio.openReadingPipe(1,pipes[1]);
+  */
+  radio.openWritingPipe(addresses[1]);
+  radio.openReadingPipe(1,addresses[hub]);
+  
   radio.startListening();
   //End communications RF
 
   strip.begin();
   strip.setBrightness(255);
   strip.show();//sets all pixels to off state
+
+  stripFB.begin();
+  stripFB.setBrightness(255);
+  stripFB.show();//sets all pixels to off state
+  
+  thisHub.healthDisplay = 1;
   
   //Serial.print("Hub NRF24. 0.77 Ajout Json"); Serial.println(IDObject);
   pinMode(2, OUTPUT);
   digitalWrite(2, LOW);
 
-  thisHub.lifeDisplay=1;
+
 }
 
 void loop(){
 if ( radio.available() ){
-    contenuUncertain();
-      radio.read( &uncertainBox, sizeof(uncertainBox) );
-      if (String(uncertainBox.to).equals(IDObject)) {
-        receiveBox = uncertainBox ;
+      radio.read( &receiveBox, sizeof(receiveBox) );
+      //contenuUncertain();
+      
+     // if (String(uncertainBox.to).equals(IDObject)) {
+        //receiveBox = uncertainBox ;
         //contenuReceive();
         justReceive = 1 ;
-        }
+        //}
   }
 
-String RecToString = String(receiveBox.to) ;
 String RecFromString = String(receiveBox.from) ;    //pour aussi remettre à 0 la receiveBox
-String RecParamString=String(receiveBox.param);
+String RecparamString  = String(receiveBox.param);
+
+  if (Serial.available()) inMessage = Serial.readStringUntil('}');
 
 
+pistolReceive(RecFromString, RecparamString, receiveBox.value);
+wizblaReceive(RecFromString, RecparamString, receiveBox.value);
 
-flingueCode(RecFromString, RecParamString, receiveBox.value);
-wizblaCode(RecFromString, RecParamString, receiveBox.value);
-//swordCode(RecFromString, RecParamString, receiveBox.value);
-//gantCode(RecFromString, RecParamString, receiveBox.value);
+/*
+//swordCode(RecFromString, RecparamString, receiveBox.value);
+//gantCode(RecFromString, RecparamString, receiveBox.value);
 
-hubReceive(RecToString, RecParamString, receiveBox.value);    //à la fin.
+hubReceive(RecToString, RecparamString, receiveBox.value);    //sert pour combat avec routeurs
 
 //{"to":":pistol","from":"!111111","param" :":shootFb","value":1}
 //{"to":":hub","from":"!111111","param":"beenShot","value":1}
 //Smartphone entries
+*/
 
-  if (Serial.available()) {
-  inMessage = Serial.readStringUntil('}');
-  //Serial.println(pistol.inMessage);
-  }
+pistolSend();
+wizblaSend();
 
-pistolReceive();
-wizblaReceive();
-pistolCode();   //à laisser dans flingueCode
-hubLoop(); //ça sera calculé par le téléphone
-hubReceiveSP() ;
+
+hubCode();
+pistolCode();
+hubFeedback() ;
+wizblaCode() ;
+
+
 
 
   if (tagNxtChrTime < millis()){  
@@ -177,6 +197,5 @@ hubReceiveSP() ;
   if (nextSend < millis() ) {canSend=1; nextSend = millis() + 10; }
 
 
-//Remise à zéro
 justReceive = 0;
 }
