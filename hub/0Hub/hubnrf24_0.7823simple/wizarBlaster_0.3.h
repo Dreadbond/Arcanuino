@@ -63,8 +63,9 @@ void wizblaSend() {
           radio.startListening();
       break;
       }
-
+//:wizbla fireFb}
       if (inMessage.startsWith("fireFb", j) ){
+        Serial.println(":wizbla fireFb");
            strcpy(sendBox.param, "fireFb"); sendBox.value= 1; 
 
           radio.openWritingPipe(addresses[wizblaAddress]);
@@ -106,7 +107,7 @@ void wizblaSend() {
       break;
       }
 
-//{"to":":wizbla","from":"!111111","param" :"ammo","value":15}
+//{"to":":wizbla","from":"!11","param" :"ammo","value":15}
       if (inMessage.startsWith("ammo", j) ){
         String arf = "" ;
           for ( j + 10 ; j < inMessage.length() ; j++){

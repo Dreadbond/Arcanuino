@@ -27,8 +27,9 @@ int rssi;
 void setup()
 {
     //delay(1000);
-    Serial.begin(9600);	// Debugging only
-    Serial.println("setup");
+    //Serial.begin(9600);	// Debugging only
+    Serial.begin(115200);  // Debugging only
+    Serial.println("recept test rssi");
 
     // Initialise the IO and ISR
     //vw_set_tx_pin(transmit_pin);
@@ -56,9 +57,11 @@ void loop()
       //rssi=map(rssi, 530, 740, 0, 255);
       //rssi=constrain(rssi, 0, 255);
       
-      //Serial.println(rssi);
+      Serial.println(rssi);
 
-    if (rssi > 600 || rssi < 400) {rssi_score += rssi ;}
+    //if (rssi > 650) {rssi_score += rssi ;}  //rssi > 600 || rssi < 400
+    if (rssi > 600 || rssi < 400) {rssi_score += rssi ;}  
+
 
     if (millis() > refeshRssi) {
       rssi_score = 0 ;
@@ -84,9 +87,18 @@ void loop()
   Serial.print(" ");
 
   */
-  Serial.println(rssi_score);
+  Serial.println(0);
+  //Serial.println(rssi_score);
   rssi_score = 0 ;
   refeshRssi = millis() + 130 ;
   digitalWrite(led_pin, LOW);
     }
+
+
+
+
+
+
+
+    
 }

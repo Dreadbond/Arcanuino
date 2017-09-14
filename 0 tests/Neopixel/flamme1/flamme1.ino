@@ -4,8 +4,8 @@
 
 LIS3MDL mag;
 
-#define PIN 5 //pin number that you have connected your data pin to
-#define PIXNUMBER 8 //number of neopixels you have connected
+#define PIN 3 //pin number that you have connected your data pin to
+#define PIXNUMBER 3 //number of neopixels you have connected
 
 float bright ;
 int coul;

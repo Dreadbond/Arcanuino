@@ -32,7 +32,7 @@ void setup()
 
 void loop()
 {
-    const char *msg = "!11";
+    const char *msg = "1";
     uint8_t buf[VW_MAX_MESSAGE_LEN];
     uint8_t buflen = VW_MAX_MESSAGE_LEN;
 
@@ -42,7 +42,8 @@ void loop()
     //Serial.println("Sent");
     digitalWrite(13, false);
 
-delay(50);
+int del = 300 + random (0, 100) ;
+delay(del);
 
 	
 }

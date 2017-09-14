@@ -43,7 +43,7 @@ String inMessage ;
 #include "nRF24L01.h"
 #include "RF24.h"
 RF24 radio(9,10);  // make sure this corresponds to the pins you are using : SCL SO
-byte addresses[][8] = {"hub","flingue","wizbla","gant","grimoire"};
+byte addresses[][8] = {"hub","flingue","wb","gant","grimoire"};
 int hub = 0 ;
 int flingue = 1 ;
 int wizblaAddress = 2 ;
@@ -112,10 +112,7 @@ void setup()
   radio.setPALevel(RF24_PA_MIN);
 
   radio.setChannel(chan);
-  /*
-  radio.openWritingPipe(pipes[4]);
-  radio.openReadingPipe(1,pipes[1]);
-  */
+
   radio.openWritingPipe(addresses[1]);
   radio.openReadingPipe(1,addresses[hub]);
   

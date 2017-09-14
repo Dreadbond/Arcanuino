@@ -1,7 +1,6 @@
 #include <VirtualWire.h>
 #include <SPI.h>
 #include <RFID.h>   
-#include <VirtualWire.h>
 
 
 #define SS_PIN 10
@@ -53,14 +52,8 @@ bool debug_mode = HIGH;
 void setup() {
     pinMode(A0, INPUT);
     Serial.begin(9600);  // Debugging only
-    Serial.println("Gant chopeur V0.1");
-    vw_set_rx_pin(7);
-    vw_set_tx_pin(6);
-    // Initialise the IO and ISR
-    vw_set_ptt_inverted(true); // Required for DR3100
-    vw_setup(2000);  // Bits per sec
+    Serial.println("Gant chopeur V0.2");
 
-    //vw_rx_start();       // Start the receiver PLL running
 
     pinMode(A5, INPUT); //digital
     pinMode(A4, INPUT); //RSSI
@@ -78,10 +71,10 @@ void setup() {
 
 void loop() {
 
-  if(sscontact < millis()) {
+  //if(sscontact < millis()) {
     if(rfid.isCard()){  //Serial.print("qdsqsd");
         if(rfid.readCardSerial()){
-            /*
+            
             Serial.print(rfid.serNum[0]);
             Serial.print(" ");
             Serial.print(rfid.serNum[1]);
@@ -91,7 +84,7 @@ void loop() {
             Serial.print(rfid.serNum[3]);
             Serial.print(" ");
             Serial.print(rfid.serNum[4]);
-            Serial.println("");*/
+            Serial.println("");
             
             //for(int x = 0; x < sizeof(cards); x++){
 
@@ -117,17 +110,17 @@ void loop() {
               }
               String messCarte = "?";
               
-              if (wifi[5] >= 5) {messCarte = "wifi";  char message_out_rf[14] = "to_pl1_hevheal" ; vw_send((uint8_t *)message_out_rf, 14); vw_wait_tx();   }        //Borne de soins
-              if (telephone[5] >= 5) {messCarte = "telephone "; char message_out_rf[14] = "to_pl1_amu_equ" ; vw_send((uint8_t *)message_out_rf, 14); vw_wait_tx(); }//Amulette
-              if (maison[5] >= 5) {messCarte = "maison "; char message_out_rf[13] = "to_pl1_redkey" ; vw_send((uint8_t *)message_out_rf, 13); vw_wait_tx(); }       //Red key
-              if (chevron[5] >= 5) {messCarte = "chevron "; char message_out_rf[15] = "to_pl1_dom1_equ" ; vw_send((uint8_t *)message_out_rf, 15); vw_wait_tx();  }  //Doominator
-              if (reveil[5] >= 5) {messCarte = "reveil "; char message_out_rf[11] = "to_pl1_coff" ; vw_send((uint8_t *)message_out_rf, 11); vw_wait_tx(); }         //Coffre
+              if (wifi[5] >= 5) {messCarte = "wifi";}        //Borne de soins
+              if (telephone[5] >= 5) {messCarte = "telephone ";}//Amulette
+              if (maison[5] >= 5) {messCarte = "maison ";}       //Red key
+              if (chevron[5] >= 5) {messCarte = "chevron ";}  //Doominator
+              if (reveil[5] >= 5) {messCarte = "reveil ";}         //Coffre
 
               if (sms[5] >= 5) {messCarte = "sms ";  }
               if (bluetooth[5] >= 5) {messCarte = "bluetooth ";  }
               if (navigation[5] >= 5) {messCarte = "navigation ";  }
-              if (power[5] >= 5) {messCarte = "power "; char message_out_rf[14] = "to_pl1_gr_equ" ; vw_send((uint8_t *)message_out_rf, 14); vw_wait_tx(); }         //Grimoire
-              if (airplane[5] >= 5) {messCarte = "airplane "; char message_out_rf[13] = "to_pl1_sw_equ" ; vw_send((uint8_t *)message_out_rf, 13); vw_wait_tx(); }   //Epée
+              if (power[5] >= 5) {messCarte = "power ";}         //Grimoire
+              if (airplane[5] >= 5) {messCarte = "airplane ";}   //Epée
             //}
 
               Serial.println(messCarte) ;
@@ -147,7 +140,7 @@ void loop() {
     }
   sscontact = millis() + 200 ;
   
-  }
+  //}
 
 }
 

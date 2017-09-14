@@ -1,0 +1,3 @@
+
+http://www.dx.com/p/i2c-iic-lcd-1602-blue-display-module-with-4p-wire-for-arduino-441771
+Ecran LCD adresse : (0x3f,16,2)
