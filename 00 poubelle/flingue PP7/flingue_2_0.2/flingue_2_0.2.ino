@@ -156,7 +156,7 @@ oldCible = cible ;
   if (irrecv.decode(&results) ) {
      if( results.value <= 127 && results.value >= 0){
     cible = results.value ;
-    targetTimeOut = millis() + 100 ;
+    targetTimeOut = millis() + 45 ;
     }
     irrecv.resume();
   }
@@ -184,7 +184,8 @@ if (cible != oldCible) {   //problème avec cible != oldCible  // && cible != "v
 
 
 ////////////////////////////////////Envoi action a : tir
-if (digitalRead(A1) == LOW && panFlag == HIGH && millis() > debounceGachette) { 
+
+if (digitalRead(A1) == HIGH && panFlag == HIGH && millis() > debounceGachette) { 
   Serial.println("Pan !");
 
   radio.stopListening();
@@ -195,7 +196,7 @@ if (digitalRead(A1) == LOW && panFlag == HIGH && millis() > debounceGachette) {
   debounceGachette = millis() + 20;
   }
 //on libère la gachette pour le prochain loop
-if (digitalRead(A1) == HIGH && millis() > debounceGachette)
+if (digitalRead(A1) == LOW && millis() > debounceGachette)
   {
       if (!panFlag){
       radio.stopListening();
@@ -207,7 +208,7 @@ if (digitalRead(A1) == HIGH && millis() > debounceGachette)
   }
 
 ////////////////////////////////////Envoi action b : rechargement
-if (digitalRead(A2) == LOW && millis() > debounceReload) { 
+if (digitalRead(A2) == HIGH && millis() > debounceReload) { 
 
   if(panFlag == HIGH){
     Serial.println("Rechargement");

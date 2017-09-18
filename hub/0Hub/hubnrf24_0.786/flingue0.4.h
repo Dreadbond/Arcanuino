@@ -44,15 +44,16 @@ void pistolSend() {
 
   for (int i=0 ; i< inMessage.length() ; i++) {
      if (inMessage.startsWith(":pistol", i) ) {
-
     for (int j=0 ; j < inMessage.length() ; j++) {
-      //{"to":":pistol","from":"!11","param" :"shootFb","value":15}
-      if (inMessage.startsWith("shootFb", j) ){
-        
+      //{"to":":pistol","from":"!11","param":"shootFB","value":"1"}
+
+      if (inMessage.startsWith("shootFB", j) ){
            strcpy(sendBox.param, "shootFB"); sendBox.value= 1; 
 
           radio.openWritingPipe(addresses[flingue]);
           radio.stopListening();
+          radio.write(&sendBox, sizeof(sendBox));
+          radio.write(&sendBox, sizeof(sendBox));
           radio.write(&sendBox, sizeof(sendBox));
           radio.startListening();
           
@@ -60,12 +61,12 @@ void pistolSend() {
       break;
       }
   
-      if (inMessage.startsWith("reloadFb", j) ){
+      if (inMessage.startsWith("reloadFB", j) ){
       //inMessage = "" ; 
       break;
       }
   
-      if (inMessage.startsWith(":target", j) ){
+      if (inMessage.startsWith("sightFB", j) ){
            strcpy(sendBox.param, "sightFB"); sendBox.value= 1; 
 
           radio.openWritingPipe(addresses[flingue]);
@@ -76,7 +77,7 @@ void pistolSend() {
       break;
       }
   
-      if (inMessage.startsWith(":!target", j) ){
+      if (inMessage.startsWith("!sightFB", j) ){
            strcpy(sendBox.param, "sightFB"); sendBox.value= 0; 
 
           radio.openWritingPipe(addresses[flingue]);

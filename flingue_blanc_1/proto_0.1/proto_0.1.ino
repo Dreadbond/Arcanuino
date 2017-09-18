@@ -9,10 +9,10 @@ bool cosplayMode = 0 ;
 #include <Adafruit_NeoPixel.h>
 //#define PIN 6 //pin number that you have connected your data pin to
 #define PixCanon 3 //number of neopixels you have connected
-Adafruit_NeoPixel stripCanon = Adafruit_NeoPixel(PixCanon, 6, NEO_GRB + NEO_KHZ800); //1. nuber defines number of pixels you have connected, 2. is number of the pin your data is connected to, 3 and 4 are other arguments but use these as they are default for most neopixels but refet to datasheet for other options
+Adafruit_NeoPixel stripCanon = Adafruit_NeoPixel(3, PixCanon, NEO_GRB + NEO_KHZ800); //1. nuber defines number of pixels you have connected, 2. is number of the pin your data is connected to, 3 and 4 are other arguments but use these as they are default for most neopixels but refet to datasheet for other options
 
 //Vibreur 
-int motorPin = 3 ;
+int motorPin = 4 ;
 
 
 //infrarouge
@@ -136,7 +136,7 @@ void setup()
   pinMode(2, OUTPUT);
   digitalWrite(2, LOW);
   
-  Serial.println("Flingue 0.6.1vib");
+  Serial.println("proto Flingue 0.1");
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -144,7 +144,10 @@ void setup()
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void loop() {
-  if (Serial.available()) inMessage = Serial.readStringUntil('}');
+  if (Serial.available()) {
+    inMessage = Serial.readStringUntil('}');
+    Serial.println(inMessage);
+  }
 
 //if (inMessage == "debug") {Serial.println("debug");}
 
@@ -172,7 +175,7 @@ oldCible = cible ;
 
 ////////////////////////////////////Envoi action c : cible (vise)
 if (cible != oldCible) {   //problème avec cible != oldCible  // && cible != "vide"
-    Serial.println(cible);
+    //Serial.println(cible);
     
     strcpy( sendBox.par, "target");
     sendBox.val = cible;
@@ -180,22 +183,41 @@ if (cible != oldCible) {   //problème avec cible != oldCible  // && cible != "v
     radio.stopListening();
     radio.write( &sendBox, sizeof(sendBox) );
     radio.startListening();
+
+/*
+      if (cible != 0) {
+    Serial.println(cible);
+  stripCanon.setPixelColor(1, 0, 5, 100); 
+          stripCanon.show();
+  }
+  else 
+  {
+    Serial.println(cible);
+    stripCanon.setPixelColor(1, 100, 5, 0); 
+          stripCanon.show();
+  }
+  */
 }
 
 
-////////////////////////////////////Envoi action a : tir
-if (digitalRead(A1) == LOW && panFlag == HIGH && millis() > debounceGachette) { 
+
+////////////////////////////////////Envoi action a : tir A2
+
+if (digitalRead(A2) == HIGH && panFlag == HIGH && millis() > debounceGachette) { 
   Serial.println("Pan !");
 
   radio.stopListening();
   strcpy( sendBox.par, "trigger"); sendBox.val = 1; radio.write( &sendBox, sizeof(sendBox) );
   radio.startListening();
 
+//tokenShoot = 1 ;
+
   panFlag = LOW ;
   debounceGachette = millis() + 20;
   }
+
 //on libère la gachette pour le prochain loop
-if (digitalRead(A1) == HIGH && millis() > debounceGachette)
+if (digitalRead(A2) == LOW && millis() > debounceGachette)
   {
       if (!panFlag){
       radio.stopListening();
@@ -203,11 +225,12 @@ if (digitalRead(A1) == HIGH && millis() > debounceGachette)
       radio.startListening();
       }
   panFlag = HIGH ;
-  debounceGachette = millis() + 50;
+  debounceGachette = millis() + 20;
   }
 
-////////////////////////////////////Envoi action b : rechargement
-if (digitalRead(A2) == LOW && millis() > debounceReload) { 
+////////////////////////////////////Envoi action b : rechargement A1
+
+if (digitalRead(A1) == LOW && millis() > debounceReload) {
 
   if(panFlag == HIGH){
     Serial.println("Rechargement");
@@ -261,7 +284,7 @@ String recparString=String(receiveBox.par);
 
   process = 0;
   }
-  
+
 //Serial.println(reception.trigger);
 if (tokenShoot) {shootFb();}
 if (shootVibToken) {shootVibFb();}
