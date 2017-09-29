@@ -159,7 +159,7 @@ oldCible = cible ;
   if (irrecv.decode(&results) ) {
      if( results.value <= 127 && results.value >= 0){
     cible = results.value ;
-    targetTimeOut = millis() + 100 ;
+    targetTimeOut = millis() + 150 ;
     }
     irrecv.resume();
   }
